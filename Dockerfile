@@ -7,8 +7,9 @@ WORKDIR /app
 # Copy requirements file
 COPY requirements.txt .
 
-# Install system dependencies and Python packages
+# Install system dependencies and Python packages (including build tools like setuptools, wheel, and build)
 RUN apt-get update && apt-get install -y --no-install-recommends gcc python3-dev build-essential \
+    && pip install --no-cache-dir setuptools wheel build \
     && pip install --no-cache-dir -r requirements.txt \
     && rm -rf /var/lib/apt/lists/*  # Clean up after install
 
@@ -18,7 +19,7 @@ FROM python:3.11-slim
 # Set working directory
 WORKDIR /app
 
-# Copy only required files from builder stage
+# Copy only required files from builder stage (installed Python packages)
 COPY --from=builder /usr/local/lib/python3.11/site-packages /usr/local/lib/python3.11/site-packages
 COPY --from=builder /usr/local/bin /usr/local/bin
 
