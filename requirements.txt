@@ -4,3 +4,4 @@ psutil==5.9.0
 numpy==1.24.2
 scikit-learn==1.6.1
 joblib>=1.2.0  # Updated to match scikit-learn
+python-dotenv==0.19.2

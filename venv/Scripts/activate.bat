@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set VIRTUAL_ENV=D:\performance_monitor\venv
+set VIRTUAL_ENV=C:\Users\Dell\Desktop\upt_VDixit\performance-monitor\venv
 
 if not defined PROMPT set PROMPT=$P$G
 
