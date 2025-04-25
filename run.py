@@ -3,9 +3,6 @@ import sys
 from app import create_app
 
 # --- Logging Setup ---
-# Basic configuration for the root logger if running directly (python run.py)
-# Gunicorn or other production servers often handle stdout/stderr streams.
-# The Flask app's specific handlers are configured in create_app.
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
