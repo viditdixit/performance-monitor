@@ -1,8 +1,39 @@
+# Git files
+.git/
+.gitignore
+.gitattributes
+
+# Virtual environment
+.venv/
 venv/
+env/
+
+# Python cache files
 __pycache__/
 *.pyc
 *.pyo
-*.pyd
+
+# IDE / Editor specific files
+.vscode/
+.idea/
+*.sublime-*
+
+# OS specific files
 .DS_Store
-*.db
-.env
+Thumbs.db
+
+# Secrets / Environment variables (SHOULD NOT BE IN IMAGE)
+.env*
+
+# Test reports / coverage
+htmlcov/
+.coverage
+*.log # Exclude log files if they are generated during build/tests locally
+
+# Build artifacts
+dist/
+build/
+*.egg-info/
+
+# Other project specific ignores (e.g., node_modules if you add frontend build steps)
+# node_modules/

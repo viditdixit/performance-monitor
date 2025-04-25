@@ -1,58 +1,49 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>System Monitoring Dashboard</title>
+    <meta name="description" content="Real-time System Performance Monitoring Dashboard">
+    <meta name="author" content="Vidit Dixit"> <title>System Performance Monitor</title>
 
-    <!-- Load CSS -->
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
 
-    <!-- Load Chart.js from CDN in the head -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
 </head>
 <body>
 
     <div class="container">
-        <h1>System Monitoring Dashboard</h1>
+        <h1>System Performance Monitor</h1>
 
-        <!-- Dropdown for selecting the refresh interval -->
-        <label for="interval-select">Refresh Interval:</label>
-        <select id="interval-select">
-            <option value="5">5 Seconds</option>
-            <option value="30">30 Seconds</option>
-            <option value="60">1 Minute</option>
-            <option value="300">5 Minutes</option>
-        </select>
-
-        <div class="metric">
-            <span>CPU Usage:</span>
-            <span id="cpu">{{ data.cpu_usage }}%</span>
+        <div class="interval-selector">
+            <label for="interval-select">Refresh Interval:</label>
+            <select id="interval-select">
+                <option value="5" selected>5 Seconds</option> <option value="10">10 Seconds</option>
+                <option value="30">30 Seconds</option>
+                <option value="60">1 Minute</option>
+                <option value="300">5 Minutes</option>
+            </select>
         </div>
 
-        <div class="metric">
-            <span>Memory Usage:</span>
-            <span id="memory">{{ data.memory_usage }}%</span>
+        <div class="metrics-grid">
+            <div class="metric-item">
+                <span class="label">CPU Usage</span>
+                <span class="value" id="cpu">Loading...</span> </div>
+            <div class="metric-item">
+                <span class="label">Memory Usage</span>
+                <span class="value" id="memory">Loading...</span> </div>
+            <div class="metric-item">
+                <span class="label">Load Average</span>
+                <span class="value" id="load">Loading...</span> </div>
         </div>
 
-        <div class="metric">
-            <span>Load Average:</span>
-            <span id="load">{{ data.load_avg }}</span>
-        </div>
+        <div class="chart-container">
+             <canvas id="metricsChart"></canvas> </div>
 
-        <!-- Chart Container -->
-        <canvas id="metricsChart" width="400" height="200"></canvas>
+        <div id="status-message" class="status safe"> Initializing... </div>
 
-        <div class="status {% if data.anomaly_detected %}alert{% else %}safe{% endif %}">
-            {% if data.anomaly_detected %}
-                🚨 Anomaly Detected! Please check the system immediately!
-            {% else %}
-                ✅ System is running smoothly.
-            {% endif %}
-        </div>
     </div>
 
-    <!-- Load custom JS after the page content is loaded -->
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>

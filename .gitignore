@@ -1,14 +1,50 @@
 # Ignore Python bytecode
-__pycache__/
 *.pyc
 *.pyo
+__pycache__/
 
 # Ignore virtual environment
 venv/
+.venv/ # Common alternative name for venv
+
+# Ignore environment variables file
 .env
 
-# Ignore Docker files (if needed)
-.docker/
+# Ignore Docker files (if needed) - only ignore specific generated files/dirs within .docker if necessary
+# Keep Dockerfile and .dockerignore tracked
+# .docker/ # Uncomment and refine if you have specific things inside .docker to ignore
 
 # Ignore log files
 logs/
+pip-log.txt
+pip-debug.log
+
+# Ignore IDE directories
+.vscode/
+.idea/
+# Add others if needed, e.g., .idea/
+
+# Ignore system files
+.DS_Store # macOS
+Thumbs.db # Windows
+
+# Ignore application-specific generated files/directories
+models/ # The anomaly model is generated
+
+# Ignore database files (if any)
+*.db
+
+# Ignore testing and coverage files
+.coverage
+.pytest_cache/
+htmlcov/
+
+# Ignore distribution / packaging files
+dist/
+*.egg-info/
+build/
+
+# Ignore specific project files that should not be tracked
+# requirements.in should typically be tracked if using pip-compile
+# Uncomment if this file is generated or local only
+structure.txt 

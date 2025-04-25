@@ -1,0 +1,7 @@
+Flask
+Werkzeug
+psutil
+numpy
+scikit-learn
+joblib
+python-dotenv

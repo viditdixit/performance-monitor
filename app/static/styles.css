@@ -1,69 +1,189 @@
+/* General styles */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Nicer font stack */
+    background-color: #f8f9fa; /* Lighter grey */
+    color: #343a40; /* Darker text for contrast */
     margin: 0;
-    padding: 0;
+    padding: 20px; /* Add padding around the body */
+    line-height: 1.6;
 }
 
 .container {
-    width: 80%;
-    margin: 50px auto;
-    background-color: #fff;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+    width: 90%; /* Use percentage for better fluidity */
+    max-width: 1000px; /* Adjust max-width as needed */
+    margin: 30px auto; /* Reduced top margin */
+    background-color: #ffffff;
+    padding: 25px 30px; /* More padding inside container */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08); /* Softer shadow */
+    border-radius: 8px; /* Slightly smaller radius */
+    border: 1px solid #dee2e6; /* Subtle border */
 }
 
 h1 {
     text-align: center;
-    color: #333;
+    color: #495057; /* Slightly softer black */
+    margin-bottom: 25px;
+    font-weight: 500; /* Less heavy */
 }
 
 /* Dropdown Styling */
-label {
-    font-weight: bold;
-    display: block;
-    margin-bottom: 5px;
+.interval-selector { /* Wrap label and select for better centering/spacing */
     text-align: center;
+    margin-bottom: 25px;
+}
+
+.interval-selector label {
+    font-weight: 600; /* Bolder label */
+    display: block;
+    margin-bottom: 8px;
+    color: #495057;
 }
 
 #interval-select {
-    display: block;
-    width: 50%;
-    margin: 10px auto;
-    padding: 8px;
-    font-size: 16px;
-    border: 1px solid #ccc;
+    display: inline-block; /* Allows centering with text-align */
+    width: auto; /* Adjust width based on content */
+    min-width: 150px; /* Minimum width */
+    padding: 10px 15px; /* Comfortable padding */
+    font-size: 1rem; /* Use rem units */
+    border: 1px solid #ced4da;
     border-radius: 4px;
     background-color: #fff;
     cursor: pointer;
+    text-align: center; /* Center text within select */
+    transition: border-color 0.2s ease-in-out; /* Smooth transition */
 }
 
-.metric {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-    border-bottom: 1px solid #ccc;
+#interval-select:focus {
+    border-color: #80bdff; /* Highlight on focus */
+    outline: none;
 }
 
-.metric:last-child {
-    border-bottom: none;
+/* Metrics Section */
+.metrics-grid { /* Use grid for better layout */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Responsive columns */
+    gap: 20px; /* Space between grid items */
+    margin-bottom: 25px;
 }
 
-.metric span {
-    font-weight: bold;
-}
-
-.status {
-    margin-top: 20px;
-    padding: 10px;
-    background-color: #ffcccc;
-    color: #d8000c;
-    border-radius: 4px;
+.metric-item { /* Style individual metric boxes */
+    background-color: #f8f9fa; /* Light background */
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #e9ecef;
     text-align: center;
 }
 
-.status.safe {
+.metric-item .label {
+    display: block;
+    font-size: 0.9rem;
+    color: #6c757d; /* Grey label */
+    margin-bottom: 5px;
+}
+
+.metric-item .value {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #343a40;
+}
+
+
+/* Status/Alert Messages (Updated for JS) */
+.status {
+    margin-top: 25px;
+    padding: 12px 18px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: 500; /* Medium weight */
+    border: 1px solid transparent;
+}
+
+.status.alert { /* Anomaly detected */
+    background-color: #f8d7da;
+    color: #721c24;
+    border-color: #f5c6cb;
+}
+
+.status.safe { /* System OK */
     background-color: #d4edda;
     color: #155724;
+    border-color: #c3e6cb;
+}
+
+.status.error { /* JS/Fetch Error */
+    background-color: #fff3cd;
+    color: #856404;
+    border-color: #ffeeba;
+}
+
+/* Chart Container */
+.chart-container {
+    margin-top: 30px;
+    position: relative; /* Needed for Chart.js responsiveness */
+    height: 350px; /* Define a height */
+    width: 100%; /* Full width */
+    border: 1px solid #e9ecef;
+    border-radius: 5px;
+    padding: 15px;
+    background-color: #fff;
+}
+
+#metricsChart {
+     /* Chart.js will manage the canvas size within the container */
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+        padding: 20px;
+    }
+
+    .metrics-grid {
+       grid-template-columns: 1fr 1fr; /* 2 columns on medium screens */
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    .chart-container {
+        height: 300px; /* Adjust height */
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+       padding: 10px;
+    }
+    .container {
+        width: 100%;
+        padding: 15px;
+        margin: 15px auto;
+        border-radius: 0; /* Full width on small screens */
+        box-shadow: none;
+        border: none;
+    }
+
+    .metrics-grid {
+       grid-template-columns: 1fr; /* 1 column on small screens */
+       gap: 15px;
+    }
+
+     h1 {
+        font-size: 1.5rem;
+    }
+
+     #interval-select {
+        width: 80%; /* Wider select */
+     }
+
+    .chart-container {
+        height: 250px; /* Further adjust height */
+        padding: 10px;
+    }
+
+     .status {
+        font-size: 0.9rem;
+     }
 }
